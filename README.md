@@ -2,7 +2,7 @@
 
 
 # RainbowTags
-LabAPI port of RainbowTags from NotIntense that was a port of from [Exiled's RainbowTags](https://github.com/NotIntense/RainbowTags)
+LabAPI port of RainbowTags from NotIntense that was a port of [Exiled's RainbowTags](https://github.com/NotIntense/RainbowTags)
 
 ## Configuration
 
