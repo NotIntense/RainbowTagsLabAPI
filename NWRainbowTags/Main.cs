@@ -21,7 +21,7 @@ namespace NWRainbowTags
         public override string Name => "NWRainbowTags";
         public override string Description => "A simple plugin to give players a rainbow tag in-game.";
         public override string Author => "NotIntense";
-        public override Version Version => new(1, 0, 0);
+        public override Version Version => new(2, 0, 7);
         public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
         public static List<Player> PlayersWithoutRTags { get; } = [];
 
@@ -53,15 +53,24 @@ namespace NWRainbowTags
         
         public void OnChangingGroup(PlayerGroupChangedEventArgs ev)
         {
+            if (ev.Player.GameObject.TryGetComponent(out TagController controller))
+                UnityEngine.Object.Destroy(controller);
+            
             if (PlayersWithoutRTags.Contains(ev.Player)) 
                 return;
             
             string[] colors;
-            
+
             if (Config!.GroupSpecificSequences)
-                TryGetCustomColors(GetGroupKey(ev.Group), out colors);
+            {
+                if (!TryGetCustomColors(GetGroupKey(ev.Group), out colors))
+                    return;
+            }
             else
-                TryGetColors(GetGroupKey(ev.Group), out colors);
+            {
+                if(!TryGetColors(GetGroupKey(ev.Group), out colors))
+                    return;
+            }
 
             if (colors == null)
             {
@@ -73,7 +82,7 @@ namespace NWRainbowTags
 
             Logger.Debug("RainbowTags: Added to " + ev.Player.Nickname);
 
-            if (ev.Player.GameObject.TryGetComponent(out TagController controller))
+            if (ev.Player.GameObject.TryGetComponent(out controller))
                 UnityEngine.Object.Destroy(controller);
 
             var rtController = ev.Player.GameObject.AddComponent<TagController>();
