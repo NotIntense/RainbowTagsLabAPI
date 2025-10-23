@@ -2,32 +2,33 @@
 using CommandSystem;
 using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Features.Wrappers;
-using NWRainbowTags;
+using RainbowTags;
 using RemoteAdmin;
 
-namespace RainbowTags.Commands;
+namespace NWRainbowTags.Commands;
 
 [CommandHandler(typeof(ClientCommandHandler))]
 [CommandHandler(typeof(RemoteAdminCommandHandler))]
 public class ToggleRTag : ICommand
 {
     public string Command => "togglerainbowtag";
-    public string[] Aliases => ["trt"];
+    public string[] Aliases { get; } = { "trt" };
     public string Description => "Toggles your rainbow tag on or off";
+    public bool SanitizeResponse => false;
 
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
         if (sender is PlayerCommandSender playerCommandSender)
         {
             Player player = Player.Get(playerCommandSender);
-            
+
             if (player == null)
             {
                 response = "You must be in-game to use this command!";
                 return false;
             }
-            
-            if (!Main.Instance.Config!.RanksWithRTags.Contains(player.GroupName))
+
+            if (!Main.Instance.Config.RanksWithRTags.Contains(player.GroupName))
             {
                 response = "You must be a member of a rank with a rainbow tag to use this command!";
                 return false;
@@ -38,10 +39,7 @@ public class ToggleRTag : ICommand
                 if (rainbowTag.enabled)
                 {
                     rainbowTag.enabled = false;
-                    
-                    if (player.UserGroup != null) 
-                        player.GroupColor = player.UserGroup.BadgeColor;
-                    
+                    player.GroupColor = player.UserGroup.BadgeColor;
                     Main.PlayersWithoutRTags.Add(player);
                     response = "Your rainbow tag has been disabled!";
                 }
@@ -54,14 +52,13 @@ public class ToggleRTag : ICommand
 
                 return true;
             }
-
-            Main.PlayersWithoutRTags.Remove(player);
-                
-            if (player.UserGroup != null)
-                Main.Instance.OnChangingGroup(new PlayerGroupChangedEventArgs(player.ReferenceHub, player.UserGroup));
-                
-            response = "Your rainbow tag has been enabled!";
-            return true;
+            else
+            {
+                Main.PlayersWithoutRTags.Remove(player);
+                Main.Instance.OnChangingGroup(new PlayerGroupChangingEventArgs(player.ReferenceHub, player.UserGroup));
+                response = "Your rainbow tag has been enabled!";
+                return true;
+            }
         }
 
         response = "You must be in-game to use this command!";

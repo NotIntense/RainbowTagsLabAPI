@@ -34,27 +34,50 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp">
-          <HintPath>B:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Assembly-CSharp.dll</HintPath>
+        <Reference Include="Assembly-CSharp_publicized">
+            <HintPath>$(EXILED_REFERENCES)\Assembly-CSharp_publicized.dll</HintPath>
         </Reference>
-        <Reference Include="CommandSystem.Core">
-          <HintPath>B:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\CommandSystem.Core.dll</HintPath>
-        </Reference>
-        <Reference Include="LabApi">
-          <HintPath>B:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\LabApi.dll</HintPath>
-        </Reference>
-        <Reference Include="Mirror">
-          <HintPath>B:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\Mirror.dll</HintPath>
-        </Reference>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Xml"/>
         <Reference Include="UnityEngine">
-          <HintPath>B:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.dll</HintPath>
+            <HintPath>$(EXILED_REFERENCES)\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>$(EXILED_REFERENCES)\UnityEngine.PhysicsModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.CoreModule">
-          <HintPath>B:\SteamLibrary\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+            <HintPath>$(EXILED_REFERENCES)\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="Mirror">
+            <HintPath>$(EXILED_REFERENCES)\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp-firstpass">
+            <HintPath>$(EXILED_REFERENCES)\Assembly-CSharp-firstpass.dll</HintPath>
+        </Reference>
+        <Reference Include="0Harmony">
+            <HintPath>$(EXILED_REFERENCES)\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="ProjectMER">
+            <HintPath>$(EXILED_REFERENCES)\ProjectMER.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>$(EXILED_REFERENCES)\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="Pooling">
+            <HintPath>$(EXILED_REFERENCES)\Pooling.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+            <HintPath>$(EXILED_REFERENCES)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+        </Reference>
+        <Reference Include="LabApi">
+            <HintPath>$(EXILED_REFERENCES)\LabApi.dll</HintPath>
+        </Reference>
+        <Reference Include="YamlDotNet">
+            <HintPath>$(EXILED_REFERENCES)\YamlDotNet.dll</HintPath>
+        </Reference>
+        <Reference Include="CommandSystem.Core">
+            <HintPath>$(EXILED_REFERENCES)\CommandSystem.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="NorthwoodLib">
+            <HintPath>$(EXILED_REFERENCES)\NorthwoodLib.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Events.Handlers;
 using LabApi.Features;
@@ -36,7 +37,7 @@ namespace NWRainbowTags
         {
             Instance = this;
             
-            PlayerEvents.GroupChanged += OnChangingGroup;
+            PlayerEvents.GroupChanging += OnChangingGroup;
             
             if (!_invalidConfig) return;
             Logger.Error("NWRainbowTags config is invalid! Please check your config file. Using default config.");
@@ -45,21 +46,18 @@ namespace NWRainbowTags
 
         public override void Disable()
         {
-            PlayerEvents.GroupChanged -= OnChangingGroup;
+            PlayerEvents.GroupChanging -= OnChangingGroup;
             
             Instance = null;
             _invalidConfig = false;
         }
         
-        public void OnChangingGroup(PlayerGroupChangedEventArgs ev)
+        public void OnChangingGroup(PlayerGroupChangingEventArgs ev)
         {
-            if (ev.Player.GameObject.TryGetComponent(out TagController controller))
-                UnityEngine.Object.Destroy(controller);
-            
             if (PlayersWithoutRTags.Contains(ev.Player)) 
                 return;
             
-            string[] colors;
+            string[] colors = null;
 
             if (Config!.GroupSpecificSequences)
             {
@@ -68,10 +66,10 @@ namespace NWRainbowTags
             }
             else
             {
-                if(!TryGetColors(GetGroupKey(ev.Group), out colors))
+                if (!TryGetColors(GetGroupKey(ev.Group), out colors))
                     return;
             }
-
+        
             if (colors == null)
             {
                 //Something went wrong
@@ -82,7 +80,7 @@ namespace NWRainbowTags
 
             Logger.Debug("RainbowTags: Added to " + ev.Player.Nickname);
 
-            if (ev.Player.GameObject.TryGetComponent(out controller))
+            if (ev.Player.GameObject.TryGetComponent(out TagController controller))
                 UnityEngine.Object.Destroy(controller);
 
             var rtController = ev.Player.GameObject.AddComponent<TagController>();
