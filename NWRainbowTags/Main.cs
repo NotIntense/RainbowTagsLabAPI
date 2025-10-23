@@ -18,7 +18,6 @@ namespace NWRainbowTags
         public static Main Instance { get; private set; }
         
         private bool _invalidConfig;
-        
         public override string Name => "NWRainbowTags";
         public override string Description => "A simple plugin to give players a rainbow tag in-game.";
         public override string Author => "NotIntense";
