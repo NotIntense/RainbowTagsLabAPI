@@ -22,7 +22,7 @@ namespace NWRainbowTags
         public override string Name => "NWRainbowTags";
         public override string Description => "A simple plugin to give players a rainbow tag in-game.";
         public override string Author => "NotIntense";
-        public override Version Version => new(2, 0, 7);
+        public override Version Version => new(3, 0, 0);
         public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
         public static List<Player> PlayersWithoutRTags { get; } = [];
 
